@@ -13,11 +13,15 @@
 % of the cycle processes. The pump and turbine operate isentropically. No
 % kinetic or potential energy effects. 
 
-function [Wc] = WAH10_2 (T1,T3,q1,q3,fluidName)
+function [Wnet_m] = WAH10_2 (T1,T3,q1,q3,fluidName)
     % returns P1 in [kPA], H1 in [J/kg], and S1 in [J/kgK]
     [P1,H1,S1] = refpropm('PHS','T',T1,'Q',q1,fluidName); %sets state 1
     [P3,H3,S3] = refpropm('PHS','T',T3,'Q',q3,fluidName); %sets state 3
     [T2,Q2,H2] = refpropm('TQH','P',P3,'S',S1,fluidName); %sets state 2
-    [T3,Q3,H3] = refpropm('TQH','P',P1,'S',S3,fluidName); %sets state 4
+    [T4,Q4,H4] = refpropm('TQH','P',P1,'S',S3,fluidName); %sets state 4
+    
+    Wt_m = H1-H2; %[J/kg]
+    Wp_m = H3-H4; %[J/kg]
+    Wnet_m = Wt_m + Wp_m; %[J/kg]
     
 end
