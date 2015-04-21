@@ -13,7 +13,7 @@
 % of the cycle processes. The pump and turbine operate isentropically. No
 % kinetic or potential energy effects. 
 
-function [Wnet_m, N, N_c] = WAH10_2 (T1,T3,q1,q3,fluidName)
+function [Wnet_m, N, N_c] = OTECmainFunction(T1,T3,q1,q3,fluidName)
     % T1 is temperature at State 1
     % T3 is temperature at State 3
     % q1 is quality at State 1 (value between 0 and 1)
