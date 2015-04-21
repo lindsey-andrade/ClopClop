@@ -14,6 +14,12 @@
 % kinetic or potential energy effects. 
 
 function [Wnet_m, N, N_c] = WAH10_2 (T1,T3,q1,q3,fluidName)
+    % T1 is temperature at State 1
+    % T3 is temperature at State 3
+    % q1 is quality at State 1 (value between 0 and 1)
+    % q3 is quality at State 3 (value between 0 and 1)
+    % fluidName is the input fluid (needs to be a string)
+    
     % returns P1 in [kPA], H1 in [J/kg], and S1 in [J/kgK]
     [P1,H1,S1] = refpropm('PHS','T',T1,'Q',q1,fluidName); %sets state 1
     [P3,H3,S3] = refpropm('PHS','T',T3,'Q',q3,fluidName); %sets state 3
