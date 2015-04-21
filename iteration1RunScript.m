@@ -9,7 +9,7 @@ fluid = 'water';
 
 [Wnet_m, N, N_c] = OTECmainFunction(T1, T3, q1, q3, fluid); 
 
-disp('Net Work')
+disp('Net Work (J/kg)')
 disp(Wnet_m)
 disp('Thermal Efficiency')
 disp(N)
