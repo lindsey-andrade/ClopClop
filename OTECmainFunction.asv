@@ -13,13 +13,13 @@ function OTECmainFunction()
 % of the cycle processes. The pump and turbine operate isentropically. No
 % kinetic or potential energy effects. 
 
-T1 = 303; % K
-T3 = 280; % K
+T1 = 303; %L
+T3 = 280;
 q1 = 1; 
 q3 = 0; 
 fluid = 'water';
 
-[Wnet_m, N, N_c] = iteration1(T1, T3, q1, q3, fluid); 
+[Wnet_m, N, N_c] = OTECmainFunction(T1, T3, q1, q3, fluid); 
 
 disp('Net Work (J/kg)')
 disp(Wnet_m)
