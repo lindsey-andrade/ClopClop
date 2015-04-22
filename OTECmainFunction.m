@@ -63,11 +63,16 @@ end
         %really salt water)
         T1 = Tw;
         T4 = Tc;
+        
         [T2,H2,S2] = refpropm('THS','P',P2,'Q',q2,fluidName); %sets state 2
         [P4,H4,S4] = refpropm('PHS','T',T4,'Q',q4,fluidName); %sets state 4 assuming saturated liquid
         [H3,S3] = refpropm('HS','T',T4,'P',P2,fluidName); %sets state 3 assuming T3 = T4
         [H1,S1] = refpropm('HS','T',T1,'P',P1,fluidName); %sets state 1 assuming water entering system is at atm pressure
     
+        % Calculate how much water gets vaporized
+        x = weightFractionVaporized(T1, P1, P2, 'water');
+        y = x; 
+        
         Wt_m = H1-H2; %[J/kg]; W_net is just W_t since there is no system pump
         Qin_m = H1-H4; %[J/kg]
         N = Wnet_m/Qin_m;
