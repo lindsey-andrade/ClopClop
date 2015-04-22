@@ -72,6 +72,20 @@ end
         Qin_m = H1-H4; %[J/kg]
         N = Wnet_m/Qin_m;
         N_c = 1-T3/T1;
+        
+        function x = weightFractionVaporized(Tup, Pup, Pdown, fluid)
+            % Tup = Temperature of liquid into the evaporator
+            % Pup = Pressure of liquid into the evaporator 
+            % Pdown = Pressure of liquid/vapor out of the evaporator
+            
+            Hul = refprop('H', 'P', Pup, 'T', Tup, fluid);
+            
+            Hdl = refprop('H', 'P', Pdown, 'Q', 0, fluid); 
+            Hdv = refprop('H', 'P', Pdown, 'Q', 1, fluid);
+            
+            x = (Hul - Hdl)/(Hdv - Hdl);
+        end
+        
     end
 
 end
