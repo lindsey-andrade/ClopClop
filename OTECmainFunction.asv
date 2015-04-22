@@ -2,7 +2,7 @@
 % Lindsey Andrade, Sean Karagianes, Meg Lidrbauch
 % Spring 2015
 function OTECmainFunction()
-close all
+
 %% Iteration 1 - Closed System
 % Assumptions: 
 % At State 1, we assume that the working fluid is a saturated vapor. At
@@ -50,14 +50,12 @@ figure
 bar(Y)
 set(gca,'Xtick',1:4,'XTickLabel',{'Water'; 'Ammonia'; 'R22'; 'R134a'})
 xlabel('Working Fluid')
-ylabel('Net Power (J/kg)')
-title('Working Fluid Comparision')
+ylabel('Net Power (W/kg)')
 
 figure
 plot(ThotRange, Wrange, 'LineWidth', 2)
-xlabel('T_{hot} (K)')
-ylabel('Net Power (J/kg)')
-title('Temperature and Power Relationship')
+xlabel('T_{hot}')
+ylabel('Net Power (W)')
 
 function [Wnet_m, N, N_c] = iteration1(T1,T3,q1,q3,fluidName)
     % T1 is temperature at State 1
