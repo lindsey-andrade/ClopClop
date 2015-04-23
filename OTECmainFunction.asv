@@ -17,7 +17,7 @@ T1 = 303; % K
 T3 = 280; % K
 q1 = 1; 
 q3 = 0; 
-fluid = 'ammonia';
+fluid = 'water';
 
 [Wnet_m, N, N_c] = iteration1(T1, T3, q1, q3, fluid); 
 
@@ -44,24 +44,22 @@ end
 [R22Wnet, R22N, R22N_c, R22State]= iteration1(T1, T3, q1, q3, 'R22'); 
 [R134aWnet, R134aN, R134aN_c, R134aState] = iteration1(T1, T3, q1, q3, 'R134a');
 [R245faWnet, R245faN, R245faN_c, R245faState] = iteration1(T1, T3, q1, q3, 'R245fa');
-[ButaneWnet, ButaneN, ButaneN_c, ButaneState] = iteration1(T1, T3, q1, q3, 'butane');
+
+Y = [WaterWnet, AmmoniaWnet, R22Wnet, R134aWnet];
+X = ['Water', 'Ammonia', 'R22', 'R134a'];
+figure; bar(Y)
+set(gca,'Xtick',1:4,'XTickLabel',{'Water'; 'Ammonia'; 'R22'; 'R134a'})
+xlabel('Working Fluid'); ylabel('Net Power (J/kg)')
+title('Working Fluid Comparision')
+figure; plot(ThotRange, Wrange, 'LineWidth', 2)
+xlabel('T_{hot} (K)'); ylabel('Net Power (J/kg)')
+title('Temperature and Power Relationship')
 
 assignin('base', 'WaterState', WaterState)
 assignin('base', 'AmmoniaState', AmmoniaState)
 assignin('base', 'R22State', R22State)
 assignin('base', 'R134aState', R134aState)
 assignin('base', 'R245faState', R245faState)
-assignin('base', 'ButaneState', ButaneState)
-
-Y = [WaterWnet, AmmoniaWnet, R22Wnet, R134aWnet, R245faWnet, ButaneWnet];
-X = ['Water', 'Ammonia', 'R22', 'R134a', 'R245fa', 'Butane'];
-figure; bar(Y)
-set(gca,'Xtick',1:6,'XTickLabel',{'Water'; 'Ammonia'; 'R22'; 'R134a'; 'R245fa'; 'Butane'})
-xlabel('Working Fluid'); ylabel('Net Power (J/kg)')
-title('Working Fluid Comparision')
-figure; plot(ThotRange, Wrange, 'LineWidth', 2)
-xlabel('T_{hot} (K)'); ylabel('Net Power (J/kg)')
-title('Temperature and Power Relationship')
 
 function [Wnet_m, N, N_c, State] = iteration1(T1,T3,q1,q3,fluidName)
     % T1 is temperature at State 1
