@@ -42,6 +42,8 @@ end
 [AmmoniaWnet, AmmoniaN, AmmoniaN_c, AmmoniaState]= iteration1(T1, T3, q1, q3, 'ammonia');
 [R22Wnet, R22N, R22N_c, R22State]= iteration1(T1, T3, q1, q3, 'R22'); 
 [R134aWnet, R134aN, R134aN_c, R134aState] = iteration1(T1, T3, q1, q3, 'R134a');
+[R245faWnet, R245faN, R245faN_c, R245faState] = iteration1(T1, T3, q1, q3, 'R245fa');
+
 Y = [WaterWnet, AmmoniaWnet, R22Wnet, R134aWnet];
 X = ['Water', 'Ammonia', 'R22', 'R134a'];
 figure; bar(Y)
@@ -56,6 +58,7 @@ assignin('base', 'WaterState', WaterState)
 assignin('base', 'AmmoniaState', AmmoniaState)
 assignin('base', 'R22State', R22State)
 assignin('base', 'R134aState', R134aState)
+assignin('base', 'R245faState', R245faState)
 
 function [Wnet_m, N, N_c, State] = iteration1(T1,T3,q1,q3,fluidName)
     % T1 is temperature at State 1
