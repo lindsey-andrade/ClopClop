@@ -21,6 +21,9 @@ fluid = 'ammonia';
 
 [Wnet_m, N, N_c] = iteration1(T1, T3, q1, q3, fluid); 
 
+disp('Iteration 1')
+disp('Working Fluid')
+disp(fluid)
 disp('Net Work (J/kg)')
 disp(Wnet_m)
 disp('Thermal Efficiency')
