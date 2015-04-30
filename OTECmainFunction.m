@@ -21,15 +21,26 @@ fluid = 'ammonia';
 
 [Wnet_m, N, N_c] = iteration1(T1, T3, q1, q3, fluid); 
 
-disp('Iteration 1')
-disp('Working Fluid')
-disp(fluid)
+% disp('Iteration 1')
+% disp('Working Fluid')
+% disp(fluid)
+% disp('Net Work (J/kg)')
+% disp(Wnet_m)
+% disp('Thermal Efficiency')
+% disp(N)
+% disp('Carnot Efficiency')
+% disp(N_c)
+
+P1 = 101.3; %[kPa]
+P2 = 1; %[kPa]
+fluid2 = 'water';
+
+[W_net,N] = iteration2(T1,T3,P1,P2,q1,q3,fluid2);
+disp('Iteration 2')
 disp('Net Work (J/kg)')
-disp(Wnet_m)
+disp(W_net)
 disp('Thermal Efficiency')
 disp(N)
-disp('Carnot Efficiency')
-disp(N_c)
 
 % Results plot for Thursday 4/22/15
 Thot_min = 298; Thot_max = 323; 
@@ -121,29 +132,32 @@ end
         T1 = Tw;
         T4 = Tc;
         
+        [H1,S1] = refpropm('HS','T',T1,'P',P1,fluidName); %sets state 1
         [T2,H2,S2] = refpropm('THS','P',P2,'Q',q2,fluidName); %sets state 2
-        [P4,H4,S4] = refpropm('PHS','T',T4,'Q',q4,fluidName); %sets state 4 assuming saturated liquid
-        [H3,S3] = refpropm('HS','T',T4,'P',P2,fluidName); %sets state 3 assuming T3 = T4
-        [H1,S1] = refpropm('HS','T',T1,'P',P1,fluidName); %sets state 1 assuming water entering system is at atm pressure
+        [P4,H4,S4] = refpropm('PHS','T',T4,'Q',q4,fluidName); %sets state 4 assuming T3 = T4
+        [T3,H3] = refpropm('TH','P',P2,'S',S4,fluidName); %sets state 3
     
         % Calculate how much water gets vaporized
-        x = weightFractionVaporized(T1, P1, P2, 'water');
+        x = weightFractionVaporized();
         y = x; 
         
-        Wt_m = H1-H2; %[J/kg]; W_net is just W_t since there is no system pump
+        Wnet_m = H1-H2; %[J/kg]; W_net is just W_t since there is no system pump
         Qin_m = H1-H4; %[J/kg]
         N = Wnet_m/Qin_m;
         N_c = 1-T3/T1;
         
-        function x = weightFractionVaporized(Tup, Pup, Pdown, fluid)
+        function x = weightFractionVaporized()
             % Tup = Temperature of liquid into the evaporator
             % Pup = Pressure of liquid into the evaporator 
             % Pdown = Pressure of liquid/vapor out of the evaporator
+            Tup = 303; %[K] We want to change this if warm water temp changes
+            Pup = 101.3; %[kPa]
+            Pdown = 1; %[kPa]
+            fluid = 'water';
+            Hul = refpropm('H', 'T', Tup, 'P', Pup, fluid);
             
-            Hul = refprop('H', 'P', Pup, 'T', Tup, fluid);
-            
-            Hdl = refprop('H', 'P', Pdown, 'Q', 0, fluid); 
-            Hdv = refprop('H', 'P', Pdown, 'Q', 1, fluid);
+            Hdl = refpropm('H', 'P', Pdown, 'Q', 0, fluid); 
+            Hdv = refpropm('H', 'P', Pdown, 'Q', 1, fluid);
             
             x = (Hul - Hdl)/(Hdv - Hdl);
         end
