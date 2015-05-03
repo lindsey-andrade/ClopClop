@@ -1,4 +1,4 @@
-function [Wnet_m, N, N_c, State] = iteration1(T1,T3,q1,q3,fluidName)
+function [Wnet_C, N, N_c, State] = iteration1(T1,T3,q1,q3,fluidName)
     % T1 is temperature at State 1
     % T3 is temperature at State 3
     % q1 is quality at State 1 (value between 0 and 1)
@@ -14,11 +14,12 @@ function [Wnet_m, N, N_c, State] = iteration1(T1,T3,q1,q3,fluidName)
     P2 = P3; P4 = P1;
     S2 = S1; S4 = S3;
     
-    Wt_m = H1-H2; %[J/kg]
-    Wp_m = H3-H4; %[J/kg]
-    Wnet_m = Wt_m + Wp_m; %[J/kg]
+    m = 192.7; % mass flow rate of refrigerant (with ammonia)[kg/s]
+    Wt = m*(H1-H2); %[J/kg]
+    Wp = m*(H3-H4); %[J/kg]
+    Wnet_C = Wt + Wp; %[J/kg]
     
-    Qin_m = H1-H4; %[J/kg]
-    N = Wnet_m/Qin_m;
+    Qin_C = m*(H1-H4); %[J/kg]
+    N = Wnet_C/Qin_C;
     N_c = 1-T3/T1;
 end
