@@ -25,9 +25,8 @@ for i = 287:305
     plot(T1,Wnet_C/10^6,'rx','MarkerSize',10)
     plot(T1,Wnet_O/10^6,'k*','MarkerSize',10)
     plot(T1,Wnet_H/10^6,'bo','MarkerSize',10)
-    line(T1,16.582)%,'g--','MarkerSize',25)
 end
-
+plot([287 305],[16.582 16.582],'g','LineWidth',3)
 legend('Closed System','Open System','Hybrid System')
 title('Relative power output as $T_h$ varies (ammonia)','Interpreter','LaTeX','FontSize',24)
 xlabel('$T_h$ [K]','Interpreter','LaTeX','FontSize',16)

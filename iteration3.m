@@ -4,7 +4,7 @@
 % P2o = 1; %[kPa]
 % fluidName = 'ammonia';
 
-function [Wnet_mH, NH] = iteration3(T1o,T3c,P1o,fluidName)
+function [Wnet_H, NH] = iteration3(T1o,T3c,P1o,fluidName)
     q1 = 1;
     q3 = 0;
     P2o = exp(20.306-5132/T1o)*.133322368;
@@ -24,21 +24,22 @@ function [Wnet_mH, NH] = iteration3(T1o,T3c,P1o,fluidName)
         
     x = weightFractionVaporized();
     y = x; 
-        
-    m = 1686*y; %mass flow rate through turbine [kg/s]
-        
-    Wt_m = H1-H2; %[J/kg]
-    Wp_m = H3-H4; %[J/kg]
-    Wnet_mH = Wt_m + Wp_m; %[J/kg]
     
-    Qin_m = H1-H4; %[J/kg]
-    NH = Wnet_mH/Qin_m;
-    
-
     m_sw = 1686; %kg/s
     
-    m_2 = m_sw * weightFractionVaporized * (H2 - H3)/(H1 - H4); 
+    m_2 = m_sw * weightFractionVaporized * (H2 - H3)/(H1 - H4);
     
+    m = 1686*y; %mass flow rate through turbine [kg/s]
+        
+    Wt = m_2*(H1-H2); %[J/kg]
+    Wp = m_2*(H3-H4); %[J/kg]
+    Wnet_H = Wt + Wp; %[J/kg]
+    
+    Wt_m = (H1-H2); %[J/kg]
+    Wp_m = (H3-H4); %[J/kg]
+    Wnet_mH = Wt_m + Wp_m; %[J/kg]
+    Qin_m = H1-H4; %[J/kg]
+    NH = Wnet_mH/Qin_m;
 
     function x = weightFractionVaporized()
             % Tup = Temperature of liquid into the evaporator
