@@ -34,21 +34,16 @@ function [Wnet_mH, NH] = iteration3(T1o,T3c,P1o,fluidName)
     Qin_m = H1-H4; %[J/kg]
     NH = Wnet_mH/Qin_m;
     
-<<<<<<< HEAD
+
     m_sw = 1686; %kg/s
     
     m_2 = m_sw * weightFractionVaporized * (H2 - H3)/(H1 - H4); 
     
-=======
->>>>>>> origin/master
+
     function x = weightFractionVaporized()
             % Tup = Temperature of liquid into the evaporator
             % Pup = Pressure of liquid into the evaporator 
             % Pdown = Pressure of liquid/vapor out of the evaporator
-<<<<<<< HEAD
-            T1o = 303; %[K] We want to change this if warm water temp changes
-            P1o = 101.3; %[kPa]
-            P2o = 1; %[kPa]
             fluid = 'water';
             Hul = refpropm('H', 'T', T1o, 'P', P1o, fluid);
             Hdl = refpropm('H', 'P', P2o, 'Q', 0, fluid); 
@@ -56,17 +51,6 @@ function [Wnet_mH, NH] = iteration3(T1o,T3c,P1o,fluidName)
             
             x = (Hul - Hdl)/(Hdv - Hdl);
     end
-=======
-            Tup = T1o; %[K] We want to change this if warm water temp changes
-            Pup = P1o; %[kPa]
-            Pdown = P2o; %[kPa]
-            fluidx = 'water';
-            Hul = refpropm('H', 'T', Tup, 'P', Pup, fluidx);
-            
-            Hdl = refpropm('H', 'P', Pdown, 'Q', 0, fluidx); 
-            Hdv = refpropm('H', 'P', Pdown, 'Q', 1, fluidx);
-            
-            x = (Hul - Hdl)/(Hdv - Hdl);
-        end
->>>>>>> origin/master
+
+           
 end
