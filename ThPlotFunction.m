@@ -28,7 +28,7 @@ for i = 287:305
 end
 plot([287 305],[16.582 16.582],'g','LineWidth',3)
 legend('Closed System','Open System','Hybrid System')
-title('Relative power output as $T_h$ varies (ammonia)','Interpreter','LaTeX','FontSize',24)
+title('Relative power output as $T_h$ varies (ammonia)','Interpreter','LaTeX','FontSize',18)
 xlabel('$T_h$ [K]','Interpreter','LaTeX','FontSize',16)
 ylabel('$\dot{W}$ [MW]','Interpreter','LaTeX','FontSize',16)
 
