@@ -15,7 +15,7 @@ function [Wnet_m, N, N_c] = iteration2(Tw,Tc,P1,P2,q2,q4,fluidName)
         [H1,S1] = refpropm('HS','T',T1,'P',P1,fluidName); %sets state 1
         [T2,H2,S2] = refpropm('THS','P',P2,'Q',q2,fluidName); %sets state 2
         [P4,H4,S4] = refpropm('PHS','T',T4,'Q',q4,fluidName); %sets state 4 assuming T3 = T4
-        [T3,H3] = refpropm('TH','P',P2,'S',S4,fluidName); %sets state 3
+        [T3,H3] = refpropm('TH','P',P4,'S',S2,fluidName); %sets state 3
         [H5] = refpropm('H','T',293,'P',4,'air.mix'); %sets begin state of air in vac chamb
         [H6] = refpropm('H','T',293,'P',P1,'air.mix'); %sets state after pump
     
@@ -24,7 +24,7 @@ function [Wnet_m, N, N_c] = iteration2(Tw,Tc,P1,P2,q2,q4,fluidName)
         y = x; 
         
         Wnet_m = H2-H3; %[J/kg]; W_net is just W_t since there is no system pump
-        Qin_m = H6-H5 %[J/kg]
+        Qin_m = H6-H5; %[J/kg]
         N = Wnet_m/Qin_m;
         N_c = 1-T3/T1;
         
